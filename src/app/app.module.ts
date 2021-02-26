@@ -34,11 +34,9 @@ import { MomentModule } from 'ngx-moment'
 import { HeaderItemComponent } from './components/header-item/header-item.component'
 import { LandingComponent } from './pages/landing/landing.component'
 import { FooterItemComponent } from './components/footer-item/footer-item.component'
-import { ColorCardItemComponent } from './components/color-card-item/color-card-item.component'
+import { TacoCardItemComponent } from './components/taco-card-item/taco-card-item.component'
 import { ExploreComponent } from './pages/explore/explore.component'
-import { AuctionsComponent } from './pages/auctions/auctions.component'
-import { MyColorsComponent } from './pages/my-colors/my-colors.component'
-import { AuctionModalComponent } from './components/auction-modal/auction-modal.component'
+import { MyTacosComponent } from './pages/my-tacos/my-tacos.component'
 import { StoreModule } from '@ngrx/store'
 import { reducers, metaReducers } from './reducers'
 import { EffectsModule } from '@ngrx/effects'
@@ -49,10 +47,9 @@ import { ConnectWalletEffects } from './connect-wallet.effects'
 import { FormsModule } from '@angular/forms'
 import { ShortenPipe } from './pipes/shorten.pipe'
 import { AmountConverterPipe } from './pipes/amount.pipe'
-import { CountdownComponent } from './components/countdown/countdown.component'
-import { ColorCardListComponent } from './components/color-card-list/color-card-list.component'
+import { TacoCardListComponent } from './components/taco-card-list/taco-card-list.component'
 import { WatchlistComponent } from './pages/watchlist/watchlist.component'
-import { ColorHistoryModalComponent } from './components/color-history-modal/color-history-modal.component'
+import { TacoImgComponent } from './components/taco-img/taco-img.component'
 
 @NgModule({
   declarations: [
@@ -60,17 +57,14 @@ import { ColorHistoryModalComponent } from './components/color-history-modal/col
     HeaderItemComponent,
     LandingComponent,
     FooterItemComponent,
-    ColorCardItemComponent,
+    TacoCardItemComponent,
     ExploreComponent,
-    AuctionsComponent,
-    MyColorsComponent,
-    AuctionModalComponent,
-    ColorHistoryModalComponent,
+    MyTacosComponent,
     ShortenPipe,
     AmountConverterPipe,
-    CountdownComponent,
-    ColorCardListComponent,
+    TacoCardListComponent,
     WatchlistComponent,
+    TacoImgComponent,
   ],
   imports: [
     BrowserModule,

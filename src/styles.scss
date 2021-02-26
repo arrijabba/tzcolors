@@ -1,23 +1,23 @@
 /* Manrope font imports*/
 @font-face {
   font-family: 'Manrope';
-  src: url(/assets/fonts/Manrope/manrope-regular.woff) format('truetype');
+  src: url(/assets/fonts/Gilam/GilamDemo-ThinItalic.otf) format('truetype');
   font-weight: 400;
 }
 
 @font-face {
   font-family: 'Manrope';
-  src: url(/assets/fonts/Manrope/manrope-light.woff) format('truetype');
+  src: url(/assets/fonts/Gilam/GilamDemo-ThinItalic.otf) format('truetype');
   font-weight: 200;
 }
 
 @font-face {
   font-family: 'Manrope';
-  src: url(/assets/fonts/Manrope/manrope-bold.woff) format('truetype');
+  src: url(/assets/fonts/Gilam/GilamDemo-ThinItalic.otf) format('truetype');
   font-weight: 600;
 }
 
-$font-family-sans-serif: 'Manrope', sans-serif;
+$font-family-sans-serif: 'Tahoma', sans-serif;
 $font-size-base: 14;
 $h1-font-size: 30px;
 
@@ -54,6 +54,15 @@ $dropdown-link-active-bg: rgba(map_get($theme-colors, 'primary'), 0.54);
 $modal-content-bg: transparent;
 $modal-content-border-width: 0;
 $link-hover-decoration: none;
+
+body {
+  background-color: #e0e9ff !important;
+}
+
+.card {
+  border: 1px solid rgba(9, 9, 9, 0.93) !important;
+  border-radius: 10px !important;
+}
 
 .nav-link.active {
   font-weight: bold;

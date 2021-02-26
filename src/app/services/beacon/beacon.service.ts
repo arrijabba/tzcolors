@@ -46,7 +46,7 @@ export class BeaconService {
     this.wallet.client.subscribeToEvent(
       BeaconEvent.OPERATION_REQUEST_ERROR,
       () => {
-        this.storeService.resetColorLoadingStates()
+        this.storeService.resetTacoLoadingStates()
       }
     )
 
@@ -90,163 +90,163 @@ export class BeaconService {
     return this.wallet.client.requestOperation(input)
   }
 
-  async bid(
-    auctionId: number,
-    tokenId: number,
-    bidAmount: string
-  ): Promise<void> {
-    this.storeService.setColorLoadingState(tokenId, true)
-    this.storeService.setFavorite(tokenId, true)
+  // async bid(
+  //   auctionId: number,
+  //   tokenId: number,
+  //   bidAmount: string
+  // ): Promise<void> {
+  //   this.storeService.setTacoLoadingState(tokenId, true)
+  //   this.storeService.setFavorite(tokenId, true)
 
-    const contractInstance = await tezos.wallet.at(
-      environment.tzColorsAuctionContract
-    )
-    console.log(contractInstance)
-    const result = await contractInstance.methods
-      .bid(auctionId)
-      .toTransferParams()
-    const res = await this.wallet.client.requestOperation({
-      operationDetails: [
-        {
-          kind: TezosOperationType.TRANSACTION,
-          amount: bidAmount,
-          destination: result.to,
-          parameters: result.parameter as any,
-        },
-      ],
-    })
-    console.log(res)
-  }
+  //   const contractInstance = await tezos.wallet.at(
+  //     environment.tzTacosAuctionContract
+  //   )
+  //   console.log(contractInstance)
+  //   const result = await contractInstance.methods
+  //     .bid(auctionId)
+  //     .toTransferParams()
+  //   const res = await this.wallet.client.requestOperation({
+  //     operationDetails: [
+  //       {
+  //         kind: TezosOperationType.TRANSACTION,
+  //         amount: bidAmount,
+  //         destination: result.to,
+  //         parameters: result.parameter as any,
+  //       },
+  //     ],
+  //   })
+  //   console.log(res)
+  // }
 
-  async claim(auctionId: number, tokenId: number): Promise<void> {
-    this.storeService.setColorLoadingState(tokenId, true)
-    this.storeService.setFavorite(tokenId, true)
+  // async claim(auctionId: number, tokenId: number): Promise<void> {
+  //   this.storeService.setTacoLoadingState(tokenId, true)
+  //   this.storeService.setFavorite(tokenId, true)
 
-    const contractInstance = await tezos.wallet.at(
-      environment.tzColorsAuctionContract
-    )
-    console.log(contractInstance)
-    const result = await contractInstance.methods.withdraw(auctionId).send()
+  //   const contractInstance = await tezos.wallet.at(
+  //     environment.tzTacosAuctionContract
+  //   )
+  //   console.log(contractInstance)
+  //   const result = await contractInstance.methods.withdraw(auctionId).send()
 
-    console.log(result)
-  }
+  //   console.log(result)
+  // }
 
-  async createInitialAuction(tokenId: number): Promise<void> {
-    this.storeService.setColorLoadingState(tokenId, true)
-    this.storeService.setFavorite(tokenId, true)
+  // async createInitialAuction(tokenId: number): Promise<void> {
+  //   this.storeService.setTacoLoadingState(tokenId, true)
+  //   this.storeService.setFavorite(tokenId, true)
 
-    const assetContract = await tezos.wallet.at(environment.tzColorsContract)
-    const auctionContract = await tezos.wallet.at(
-      environment.tzColorsAuctionContract
-    )
+  //   const assetContract = await tezos.wallet.at(environment.tzTacosContract)
+  //   const auctionContract = await tezos.wallet.at(
+  //     environment.tzTacosAuctionContract
+  //   )
 
-    const randomNumber = await getRandomNumber(10)
+  //   const randomNumber = await getRandomNumber(10)
 
-    const result = await assetContract.methods
-      .initial_auction(randomNumber, [tokenId])
-      .toTransferParams()
+  //   const result = await assetContract.methods
+  //     .initial_auction(randomNumber, [tokenId])
+  //     .toTransferParams()
 
-    const bidResult = await auctionContract.methods
-      .bid(randomNumber)
-      .toTransferParams()
+  //   const bidResult = await auctionContract.methods
+  //     .bid(randomNumber)
+  //     .toTransferParams()
 
-    const res = await this.wallet.client.requestOperation({
-      operationDetails: [
-        {
-          kind: TezosOperationType.TRANSACTION,
-          amount: '0',
-          destination: result.to,
-          parameters: result.parameter as any,
-        },
-        {
-          kind: TezosOperationType.TRANSACTION,
-          amount: '1000000',
-          destination: bidResult.to,
-          parameters: bidResult.parameter as any,
-        },
-      ],
-    })
+  //   const res = await this.wallet.client.requestOperation({
+  //     operationDetails: [
+  //       {
+  //         kind: TezosOperationType.TRANSACTION,
+  //         amount: '0',
+  //         destination: result.to,
+  //         parameters: result.parameter as any,
+  //       },
+  //       {
+  //         kind: TezosOperationType.TRANSACTION,
+  //         amount: '1000000',
+  //         destination: bidResult.to,
+  //         parameters: bidResult.parameter as any,
+  //       },
+  //     ],
+  //   })
 
-    console.log(res)
-  }
+  //   console.log(res)
+  // }
 
-  async createAuction(
-    owner: string,
-    tokenId: number,
-    startAmount: string,
-    durationDays: string
-  ): Promise<void> {
-    this.storeService.setColorLoadingState(tokenId, true)
-    this.storeService.setFavorite(tokenId, true)
+  // async createAuction(
+  //   owner: string,
+  //   tokenId: number,
+  //   startAmount: string,
+  //   durationDays: string
+  // ): Promise<void> {
+  //   this.storeService.setTacoLoadingState(tokenId, true)
+  //   this.storeService.setFavorite(tokenId, true)
 
-    const amount = new BigNumber(startAmount).shiftedBy(6)
-    if (!startAmount || !amount.modulo(100_000).isEqualTo(0)) {
-      throw new Error(`Invalid "start amount" ${startAmount}`)
-    }
-    if (!durationDays || new BigNumber(durationDays).isLessThan(0.5)) {
-      throw new Error(`Invalid "duration" ${durationDays}`)
-    }
+  //   const amount = new BigNumber(startAmount).shiftedBy(6)
+  //   if (!startAmount || !amount.modulo(100_000).isEqualTo(0)) {
+  //     throw new Error(`Invalid "start amount" ${startAmount}`)
+  //   }
+  //   if (!durationDays || new BigNumber(durationDays).isLessThan(0.5)) {
+  //     throw new Error(`Invalid "duration" ${durationDays}`)
+  //   }
 
-    const durationInSeconds = new BigNumber(durationDays)
-      .times(24)
-      .times(60)
-      .times(60)
-      .times(1000)
+  //   const durationInSeconds = new BigNumber(durationDays)
+  //     .times(24)
+  //     .times(60)
+  //     .times(60)
+  //     .times(1000)
 
-    const endDate = new Date(
-      new Date().getTime() + durationInSeconds.toNumber()
-    )
+  //   const endDate = new Date(
+  //     new Date().getTime() + durationInSeconds.toNumber()
+  //   )
 
-    const contractInstance = await tezos.wallet.at(environment.tzColorsContract)
+  //   const contractInstance = await tezos.wallet.at(environment.tzTacosContract)
 
-    const updateOperatorsResult = await contractInstance.methods
-      .update_operators([
-        {
-          add_operator: {
-            owner,
-            operator: environment.tzColorsAuctionContract,
-            token_id: tokenId,
-          },
-        },
-      ])
-      .toTransferParams()
+  //   const updateOperatorsResult = await contractInstance.methods
+  //     .update_operators([
+  //       {
+  //         add_operator: {
+  //           owner,
+  //           operator: environment.tzTacosAuctionContract,
+  //           token_id: tokenId,
+  //         },
+  //       },
+  //     ])
+  //     .toTransferParams()
 
-    const auctionContract = await tezos.wallet.at(
-      environment.tzColorsAuctionContract
-    )
+  //   const auctionContract = await tezos.wallet.at(
+  //     environment.tzTacosAuctionContract
+  //   )
 
-    const randomNumber = await getRandomNumber(10)
+  //   const randomNumber = await getRandomNumber(10)
 
-    const createAuctionResult = await auctionContract.methods
-      .create_auction(
-        randomNumber, // auction_id
-        amount.toString(), // bid_amount
-        endDate,
-        environment.tzColorsContract, // token_address
-        1, // token_amount (always 1)
-        tokenId // token_id
-      )
-      .toTransferParams()
+  //   const createAuctionResult = await auctionContract.methods
+  //     .create_auction(
+  //       randomNumber, // auction_id
+  //       amount.toString(), // bid_amount
+  //       endDate,
+  //       environment.tzTacosContract, // token_address
+  //       1, // token_amount (always 1)
+  //       tokenId // token_id
+  //     )
+  //     .toTransferParams()
 
-    const res = await this.wallet.client.requestOperation({
-      operationDetails: [
-        {
-          kind: TezosOperationType.TRANSACTION,
-          amount: '0',
-          destination: updateOperatorsResult.to,
-          parameters: updateOperatorsResult.parameter as any,
-        },
-        {
-          kind: TezosOperationType.TRANSACTION,
-          amount: '0',
-          destination: createAuctionResult.to,
-          parameters: createAuctionResult.parameter as any,
-        },
-      ],
-    })
+  //   const res = await this.wallet.client.requestOperation({
+  //     operationDetails: [
+  //       {
+  //         kind: TezosOperationType.TRANSACTION,
+  //         amount: '0',
+  //         destination: updateOperatorsResult.to,
+  //         parameters: updateOperatorsResult.parameter as any,
+  //       },
+  //       {
+  //         kind: TezosOperationType.TRANSACTION,
+  //         amount: '0',
+  //         destination: createAuctionResult.to,
+  //         parameters: createAuctionResult.parameter as any,
+  //       },
+  //     ],
+  //   })
 
-    console.log(res)
-  }
+  //   console.log(res)
+  // }
 
   async reset(): Promise<void> {
     return this.wallet.clearActiveAccount()
@@ -255,7 +255,7 @@ export class BeaconService {
   private async getBalances(_userAddress: string) {
     try {
       const contractInstance = await tezos.wallet.at(
-        environment.tzColorsContract
+        environment.tzTacosContract
       )
       const storage: Storage = await contractInstance.storage()
 

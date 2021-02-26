@@ -1,0 +1,58 @@
+<div *ngIf="taco" class="card h-100" style="overflow: hidden">
+  <div class="card-body d-flex flex-column">
+    <div
+      class="tacoBack card--taco__header m-4 d-flex justify-content-between"
+      [ngStyle]="{ 'background-taco': taco.symbol }"
+      [ngClass]="{
+        Normal: getRarity() === 'Normal',
+        Rare: getRarity() === 'Rare',
+        Hidden: getRarity() === 'Hidden',
+        Secret: getRarity() === 'Secret'
+      }"
+    >
+      <div class="d-flex flex-column justify-content-between align-items-end">
+        <button
+          [ngClass]="{ btn__favorite: !taco.isFavorite, '': taco.isFavorite }"
+          type="button"
+          (click)="toggleFavorite()"
+          class="btn btn-light btn-sm m-2"
+          style="position: absolute"
+        >
+          <fa-icon *ngIf="taco.isFavorite" [icon]="['fas', 'star']"></fa-icon>
+          <fa-icon *ngIf="!taco.isFavorite" [icon]="['far', 'star']"></fa-icon>
+        </button>
+
+        <taco-img
+          [dna_data]="taco"
+          class="floating"
+          style="
+            width: 100%;
+            height: 100%;
+            scale: 1.5;
+            display: block;
+            max-height: 164px;
+          "
+        ></taco-img>
+      </div>
+    </div>
+    <div class="px-4 d-flex flex-column">
+      <h3 class="m-0">
+        {{ taco.name }}
+        <!--         <span
+          class="badge badge-light align-top"
+          >new</span -->
+      </h3>
+
+      <p class="text-muted font-weight-light">
+        #{{ taco.token_id }} • {{ taco.rarity | titlecase }} •
+        <a
+          class="text-dark"
+          (click)="openAddress(taco?.owner!)"
+          href
+          target="_blank"
+          >{{ taco?.owner! | shorten }}</a
+        >
+      </p>
+    </div>
+  </div>
+</div>

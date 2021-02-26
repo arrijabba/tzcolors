@@ -2,9 +2,9 @@ import { AccountInfo } from '@airgap/beacon-sdk'
 import { Action, createReducer, on } from '@ngrx/store'
 
 import * as actions from './connect-wallet.actions'
-import { Color } from './services/store/store.service'
+import { Taco } from './services/store/store.service'
 
-const colors = require('../assets/colors.json')
+const tacos = []
 
 export const appFeatureKey = 'app'
 
@@ -14,15 +14,13 @@ export interface Busy {
 
 export interface State {
   connectedWallet: AccountInfo | undefined
-  colors: Color[]
+  tacos: Taco[]
   busy: Busy
 }
 
 export const initialState: State = {
   connectedWallet: undefined,
-  colors: colors.map((color: Color) => {
-    return color
-  }),
+  tacos: [],
   busy: {
     connectedWallet: false,
   },

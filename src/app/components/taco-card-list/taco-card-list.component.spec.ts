@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { AuctionModalComponent } from './auction-modal.component'
+import { TacoCardListComponent } from './taco-card-list.component'
 
-describe('AuctionModalComponent', () => {
-  let component: AuctionModalComponent
-  let fixture: ComponentFixture<AuctionModalComponent>
+describe('TacoCardListComponent', () => {
+  let component: TacoCardListComponent
+  let fixture: ComponentFixture<TacoCardListComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AuctionModalComponent],
+      declarations: [TacoCardListComponent],
     }).compileComponents()
   })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AuctionModalComponent)
+    fixture = TestBed.createComponent(TacoCardListComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

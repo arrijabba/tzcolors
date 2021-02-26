@@ -1,13 +1,3 @@
-.dog {
-  * {
-    -moz-filter: grayscale(100%);
-    -webkit-filter: grayscale(100%);
-    filter: gray;
-    filter: grayscale(100%);
-    transition: filter 2s;
-  }
-}
-
 .normal {
   * {
     -moz-filter: grayscale(0%);

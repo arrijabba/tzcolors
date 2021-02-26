@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { AuctionsComponent } from './auctions.component'
+import { MyTacosComponent } from './my-tacos.component'
 
-describe('AuctionsComponent', () => {
-  let component: AuctionsComponent
-  let fixture: ComponentFixture<AuctionsComponent>
+describe('MyTacosComponent', () => {
+  let component: MyTacosComponent
+  let fixture: ComponentFixture<MyTacosComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AuctionsComponent],
+      declarations: [MyTacosComponent],
     }).compileComponents()
   })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AuctionsComponent)
+    fixture = TestBed.createComponent(MyTacosComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

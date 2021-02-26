@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import {
-  Color,
-  ColorCategory,
+  Taco,
+  TacoCategory,
   SortDirection,
   SortTypes,
   StoreService,
@@ -11,16 +11,16 @@ import {
 } from 'src/app/services/store/store.service'
 
 @Component({
-  selector: 'app-color-card-list',
-  templateUrl: './color-card-list.component.html',
-  styleUrls: ['./color-card-list.component.scss'],
+  selector: 'app-taco-card-list',
+  templateUrl: './taco-card-list.component.html',
+  styleUrls: ['./taco-card-list.component.scss'],
 })
-export class ColorCardListComponent implements OnInit {
+export class TacoCardListComponent implements OnInit {
   @Input()
-  public colors$: Observable<Color[]> = new Observable()
+  public tacos$: Observable<Taco[]> = new Observable()
 
   @Input()
-  public title: string = 'Colors'
+  public title: string = 'Tacos'
 
   @Input()
   public emptyText: string = 'There is nothing here yet!'
@@ -41,7 +41,7 @@ export class ColorCardListComponent implements OnInit {
 
   sortType$: Observable<SortTypes>
   sortDirection$: Observable<SortDirection>
-  category$: Observable<ColorCategory>
+  category$: Observable<TacoCategory>
 
   loading$: Observable<boolean>
 
@@ -60,7 +60,7 @@ export class ColorCardListComponent implements OnInit {
     )
   }
 
-  setCategory(oldCategory: ColorCategory, category: ColorCategory): void {
+  setCategory(oldCategory: TacoCategory, category: TacoCategory): void {
     if (oldCategory === category) {
       this.storeService.setCategory('all')
     } else {

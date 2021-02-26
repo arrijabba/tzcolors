@@ -17,28 +17,36 @@
           All
         </button>
         <button
-          (click)="setCategory(category, 'standard')"
+          (click)="setCategory(category, 'Normal')"
           type="button"
           class="btn btn-sm mr-3"
-          [ngClass]="category === 'standard' ? 'btn-dark' : 'btn-light'"
+          [ngClass]="category === 'Normal' ? 'btn-dark' : 'btn-light'"
         >
-          Standard
+          Normal
         </button>
         <button
-          (click)="setCategory(category, 'epic')"
+          (click)="setCategory(category, 'Rare')"
           type="button"
           class="btn btn-sm mr-3"
-          [ngClass]="category === 'epic' ? 'btn-dark' : 'btn-light'"
+          [ngClass]="category === 'Rare' ? 'btn-dark' : 'btn-light'"
         >
-          Epic
+          Rare
         </button>
         <button
-          (click)="setCategory(category, 'legendary')"
+          (click)="setCategory(category, 'Hidden')"
           type="button"
           class="btn btn-sm mr-3"
-          [ngClass]="category === 'legendary' ? 'btn-dark' : 'btn-light'"
+          [ngClass]="category === 'Hidden' ? 'btn-dark' : 'btn-light'"
         >
-          Legendary
+          Hidden
+        </button>
+        <button
+          (click)="setCategory(category, 'Secret')"
+          type="button"
+          class="btn btn-sm mr-3"
+          [ngClass]="category === 'Secret' ? 'btn-dark' : 'btn-light'"
+        >
+          Secret
         </button>
       </div>
     </div>
@@ -62,55 +70,40 @@
         class="col-12 col-md-6 offset-0 offset-md-6 d-flex justify-content-end advanced-search__container"
       >
         <button
-          (click)="[sortType('name'), sortDirection(sortingDirection, 'asc')]"
+          (click)="[sortType('ID'), sortDirection(sortingDirection, 'asc')]"
           type="button"
           class="btn btn-sm mr-3"
-          [ngClass]="sortingType === 'name' ? 'btn-dark' : 'btn-light'"
+          [ngClass]="sortingType === 'ID' ? 'btn-dark' : 'btn-light'"
         >
           <fa-icon
             [icon]="['fas', 'sort-alpha-down']"
-            *ngIf="sortingType === 'name' && sortingDirection === 'asc'"
+            *ngIf="sortingType === 'ID' && sortingDirection === 'asc'"
           ></fa-icon>
 
           <fa-icon
             [icon]="['fas', 'sort-alpha-up']"
-            *ngIf="sortingType === 'name' && sortingDirection === 'desc'"
+            *ngIf="sortingType === 'ID' && sortingDirection === 'desc'"
           ></fa-icon>
-          <span>Name</span>
+          <span>ID</span>
         </button>
         <button
-          (click)="[sortType('price'), sortDirection(sortingDirection, 'desc')]"
+          (click)="
+            [sortType('rarity'), sortDirection(sortingDirection, 'desc')]
+          "
           type="button"
           class="btn btn-sm mr-3"
-          [ngClass]="sortingType === 'price' ? 'btn-dark' : 'btn-light'"
+          [ngClass]="sortingType === 'rarity' ? 'btn-dark' : 'btn-light'"
         >
           <fa-icon
             [icon]="['fas', 'sort-amount-up']"
-            *ngIf="sortingType === 'price' && sortingDirection === 'asc'"
+            *ngIf="sortingType === 'rarity' && sortingDirection === 'asc'"
           ></fa-icon>
 
           <fa-icon
             [icon]="['fas', 'sort-amount-down']"
-            *ngIf="sortingType === 'price' && sortingDirection === 'desc'"
+            *ngIf="sortingType === 'rarity' && sortingDirection === 'desc'"
           ></fa-icon>
-          <span>Price</span>
-        </button>
-        <button
-          (click)="[sortType('time'), sortDirection(sortingDirection, 'asc')]"
-          type="button"
-          class="btn btn-sm mr-3"
-          [ngClass]="sortingType === 'time' ? 'btn-dark' : 'btn-light'"
-        >
-          <fa-icon
-            [icon]="['fas', 'sort-amount-up']"
-            *ngIf="sortingType === 'time' && sortingDirection === 'asc'"
-          ></fa-icon>
-
-          <fa-icon
-            [icon]="['fas', 'sort-amount-down']"
-            *ngIf="sortingType === 'time' && sortingDirection === 'desc'"
-          ></fa-icon>
-          <span>Time</span>
+          <span>Rarity</span>
         </button>
         <button
           (click)="clearFilters()"
@@ -127,8 +120,8 @@
   <ng-container *ngIf="count$ | async; then content; else empty"></ng-container>
 </div>
 <ng-template #content>
-  <div *ngFor="let color of colors$ | async" class="col-12 col-md-3 py-3">
-    <app-color-card-item [color]="color"></app-color-card-item></div
+  <div *ngFor="let taco of tacos$ | async" class="col-12 col-md-3 py-3">
+    <app-taco-card-item [taco]="taco"></app-taco-card-item></div
 ></ng-template>
 <ng-template #empty>
   <div class="col-12 h-100">
